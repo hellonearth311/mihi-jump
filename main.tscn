@@ -3,6 +3,7 @@
 [ext_resource type="Script" uid="uid://xqwxvqiviidn" path="res://player.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dgmgbpovj3qsh" path="res://mihi.png" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6ykrfflhoq7y" path="res://seamless_brick-010-512x512.png" id="3_h2yge"]
+[ext_resource type="Texture2D" uid="uid://bkprgv57erom2" path="res://jump_pad.png" id="4_1bvp3"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8udl"]
 size = Vector2(50.5, 50.5)
@@ -1058,6 +1059,9 @@ func _process(delta: float) -> void:
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_wersh"]
 size = Vector2(9784, 258)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ogsc0"]
+size = Vector2(62.5, 12.5)
+
 [node name="Node" type="Node" unique_id=1107293185]
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1770190244]
@@ -1088,5 +1092,16 @@ script = SubResource("GDScript_h2yge")
 [node name="CollisionShape2D" type="CollisionShape2D" parent="KillZone" unique_id=1375453009]
 position = Vector2(3092, 1206)
 shape = SubResource("RectangleShape2D_wersh")
+
+[node name="JumpPad" type="Area2D" parent="." unique_id=763512208]
+
+[node name="Sprite2D" type="Sprite2D" parent="JumpPad" unique_id=1592178685]
+position = Vector2(5856, 761)
+scale = Vector2(0.31958762, 0.1875)
+texture = ExtResource("4_1bvp3")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="JumpPad" unique_id=309705940]
+position = Vector2(5856, 762)
+shape = SubResource("RectangleShape2D_ogsc0")
 
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]

@@ -3,6 +3,7 @@ extends CharacterBody2D
 
 const SPEED = 500.0
 const JUMP_VELOCITY = -800.0
+const LAUNCH_FORCE = -1500.0
 
 
 func _physics_process(delta: float) -> void:
@@ -28,3 +29,8 @@ func _physics_process(delta: float) -> void:
 func _on_kill_zone_body_entered(body: Node2D) -> void:
 	if body.name == "Player":
 		get_tree().reload_current_scene()
+
+
+func _on_jump_pad_body_entered(body: Node2D) -> void:
+	if body is CharacterBody2D:
+		body.velocity.y = LAUNCH_FORCE

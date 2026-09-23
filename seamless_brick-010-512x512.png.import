@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://bnkmlkjxa24ho"
-path="res://.godot/imported/TileMap_Grass.png-7c8beed413d5de4fbf493d4a2ef0b51b.ctex"
+uid="uid://6ykrfflhoq7y"
+path="res://.godot/imported/seamless_brick-010-512x512.png-4f84a93c1d3d7bdaefb040bae6b9228a.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://TileMap_Grass.png"
-dest_files=["res://.godot/imported/TileMap_Grass.png-7c8beed413d5de4fbf493d4a2ef0b51b.ctex"]
+source_file="res://seamless_brick-010-512x512.png"
+dest_files=["res://.godot/imported/seamless_brick-010-512x512.png-4f84a93c1d3d7bdaefb040bae6b9228a.ctex"]
 
 [params]
 

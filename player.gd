@@ -2,7 +2,7 @@ extends CharacterBody2D
 
 
 const SPEED = 500.0
-const JUMP_VELOCITY = -900.0
+const JUMP_VELOCITY = -800.0
 
 
 func _physics_process(delta: float) -> void:
@@ -23,3 +23,8 @@ func _physics_process(delta: float) -> void:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 
 	move_and_slide()
+
+
+func _on_kill_zone_body_entered(body: Node2D) -> void:
+	if body.name == "Player":
+		get_tree().reload_current_scene()

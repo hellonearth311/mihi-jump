@@ -1,10 +1,12 @@
 [gd_scene format=4 uid="uid://dnusybiebs06w"]
 
+[ext_resource type="Script" uid="uid://dw53deu4obbhj" path="res://main.gd" id="1_272bh"]
 [ext_resource type="Script" uid="uid://xqwxvqiviidn" path="res://player.gd" id="1_h2yge"]
 [ext_resource type="Texture2D" uid="uid://dgmgbpovj3qsh" path="res://mihi.png" id="2_h2yge"]
 [ext_resource type="Texture2D" uid="uid://6ykrfflhoq7y" path="res://seamless_brick-010-512x512.png" id="3_h2yge"]
 [ext_resource type="Script" uid="uid://dnryqg2eldgvo" path="res://camera_2d.gd" id="3_lquwl"]
 [ext_resource type="Texture2D" uid="uid://bkprgv57erom2" path="res://jump_pad.png" id="4_1bvp3"]
+[ext_resource type="Texture2D" uid="uid://bt8d5u7uqtqdv" path="res://star.png" id="6_7mycd"]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_c8udl"]
 size = Vector2(51.25, 50.5)
@@ -1081,22 +1083,33 @@ size = Vector2(62.5, 12.5)
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_fbv0h"]
 size = Vector2(952.75, 986)
 
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_tdot4"]
+size = Vector2(63, 63)
+
+[sub_resource type="LabelSettings" id="LabelSettings_c8udl"]
+font_color = Color(0.2404972, 0.99705774, 0.40957454, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_c8udl"]
+bg_color = Color(0.33210257, 0.68790793, 0.4388109, 1)
+
 [node name="Node" type="Node" unique_id=1107293185]
+script = ExtResource("1_272bh")
 
 [node name="Player" type="CharacterBody2D" parent="." unique_id=1770190244]
+position = Vector2(1975, -420)
 script = ExtResource("1_h2yge")
 
 [node name="Sprite2D" type="Sprite2D" parent="Player" unique_id=840832809]
-position = Vector2(4709.5, 777.25)
+position = Vector2(-1617.5, 805.25)
 scale = Vector2(0.09960943, 0.09863282)
 texture = ExtResource("2_h2yge")
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="Player" unique_id=1368874136]
-position = Vector2(4709.625, 777)
+position = Vector2(-1617.3745, 805)
 shape = SubResource("RectangleShape2D_c8udl")
 
 [node name="Camera2D" type="Camera2D" parent="Player" unique_id=1383325749]
-position = Vector2(4710, 777)
+position = Vector2(-1616.9995, 805)
 position_smoothing_enabled = true
 position_smoothing_speed = 6.0
 script = ExtResource("3_lquwl")
@@ -1128,10 +1141,49 @@ shape = SubResource("RectangleShape2D_ogsc0")
 [node name="ZoomOutCamera" type="Area2D" parent="." unique_id=1225906807]
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="ZoomOutCamera" unique_id=727849850]
-position = Vector2(7135.625, 575)
+position = Vector2(7150, 575)
 shape = SubResource("RectangleShape2D_fbv0h")
+
+[node name="Star" type="Area2D" parent="." unique_id=1287279428]
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Star" unique_id=1730601357]
+position = Vector2(7712, 928)
+shape = SubResource("RectangleShape2D_tdot4")
+
+[node name="Sprite2D" type="Sprite2D" parent="Star" unique_id=1575717122]
+position = Vector2(7713, 928)
+scale = Vector2(0.122489005, 0.12624775)
+texture = ExtResource("6_7mycd")
+
+[node name="CanvasLayer" type="CanvasLayer" parent="." unique_id=60096801]
+
+[node name="VBoxContainer" type="VBoxContainer" parent="CanvasLayer" unique_id=1143589096]
+visible = false
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -20.0
+offset_top = -20.0
+offset_right = 20.0
+offset_bottom = 20.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="CanvasLayer/VBoxContainer" unique_id=1878507290]
+layout_mode = 2
+text = "you win! play again?"
+label_settings = SubResource("LabelSettings_c8udl")
+
+[node name="Button" type="Button" parent="CanvasLayer/VBoxContainer" unique_id=462487770]
+layout_mode = 2
+theme_override_styles/normal = SubResource("StyleBoxFlat_c8udl")
+text = "yes!"
 
 [connection signal="body_entered" from="KillZone" to="Player" method="_on_kill_zone_body_entered"]
 [connection signal="body_entered" from="JumpPad" to="Player" method="_on_jump_pad_body_entered"]
 [connection signal="body_entered" from="ZoomOutCamera" to="Player/Camera2D" method="_on_zoom_out_camera_body_entered"]
 [connection signal="body_exited" from="ZoomOutCamera" to="Player/Camera2D" method="_on_zoom_out_camera_body_exited"]
+[connection signal="body_shape_entered" from="Star" to="Player" method="_on_area_2d_body_shape_entered"]
+[connection signal="pressed" from="CanvasLayer/VBoxContainer/Button" to="." method="_on_button_pressed"]
